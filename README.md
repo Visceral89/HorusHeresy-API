@@ -43,6 +43,14 @@ Once the server is running, you can access the API endpoints:
 - Method: GET
 - Description: Returns the details of a specific legion based on the provided ID.
 
+### To:do
+
+- Add all the legions to the array.
+- Add homeworld property.
+- Add notable characters.
+- Add colorschemes.
+- Connect database (Vercel Postgres).
+
 ## Deployment
 
 For deploying this application, you can use Vercel or any other preferred hosting platform. Refer to the specific platform's documentation for deployment instructions.
