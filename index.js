@@ -88,7 +88,7 @@ app.get("/legions", (req, res) => {
 });
 
 // Route to specific legion
-app.get("/factions/:id", (req, res) => {
+app.get("/legion/:id", (req, res) => {
 	const legion = legions.find((f) => f.id === parseInt(req.params.id));
 
 	if (legion) {
@@ -96,6 +96,18 @@ app.get("/factions/:id", (req, res) => {
 	} else {
 		res.status(404).send("Legion not found");
 	}
+});
+
+//Route to Traitor Legions
+app.get("/legions/loyalty:", (req, res) => {
+	const { traitor } = req.query;
+
+	const isTraitor = traitor === "true";
+
+	const filteredLegions = legions.filter(
+		(legion) => legion.traitor === isTraitor
+	);
+	res.json(filteredLegions);
 });
 
 app.listen(port, () => {
