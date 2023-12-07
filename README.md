@@ -38,6 +38,11 @@ Once the server is running, you can access the API endpoints:
 - Method: GET
 - Description: Returns the details of a specific legion based on the provided ID.
 
+- **Get legions by loyalty:**
+- Endpoint: `/legions/loyalty?traitor=true`
+- Method: GET
+- Description: Returns the details of a specific legion based on the provided ID.
+
 ## Deployment
 
 For deploying this application, you can use Vercel or any other preferred hosting platform. Refer to the specific platform's documentation for deployment instructions.
