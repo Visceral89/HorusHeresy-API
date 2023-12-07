@@ -98,7 +98,7 @@ app.get("/legion/:id", (req, res) => {
 	}
 });
 
-//Route to Traitor Legions
+//Query route to Traitor Legions
 app.get("/legions/loyalty:", (req, res) => {
 	const { traitor } = req.query;
 
