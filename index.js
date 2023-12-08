@@ -9,6 +9,12 @@ const legions = [
 		description: "...",
 		primarch: "Lion el Johnsson",
 		traitor: false,
+		homeworld: "Caliban",
+		colors: {
+			primary: "#004225",
+			secondary: "#FFFFFF",
+			accent: "#000000",
+		},
 	},
 	{
 		id: 2,
@@ -16,6 +22,7 @@ const legions = [
 		description: "[...REDACTED...]",
 		primarch: "N/A",
 		traitor: true,
+		homeworld: "N/A",
 	},
 	{
 		id: 3,
@@ -23,6 +30,7 @@ const legions = [
 		description: "...",
 		primarch: "Fulgrim",
 		traitor: true,
+		homeworld: "Chemos",
 	},
 	{
 		id: 4,
@@ -30,6 +38,7 @@ const legions = [
 		description: "...",
 		primarch: "Perturabo",
 		traitor: true,
+		homeworld: "Olympia",
 	},
 	{
 		id: 5,
@@ -37,6 +46,7 @@ const legions = [
 		description: "...",
 		primarch: "Jaghatai Khan",
 		traitor: false,
+		homeworld: "Mundus Planus",
 	},
 	{
 		id: 6,
@@ -44,6 +54,7 @@ const legions = [
 		description: "...",
 		primarch: "Leman Russ",
 		traitor: false,
+		homeworld: "Fenris",
 	},
 	{
 		id: 7,
