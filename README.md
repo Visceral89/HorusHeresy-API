@@ -34,22 +34,27 @@ Once the server is running, you can access the API endpoints:
 - Description: Returns a list of all legions with their details.
 
 - **Get Specific Legion by ID:**
-- Endpoint: `/legions/:id`
+- Endpoint: `/legion/:id`
 - Method: GET
 - Description: Returns the details of a specific legion based on the provided ID.
 
-- **Get legions by loyalty:**
-- Endpoint: `/legions/loyalty?traitor=true`
+- **Get All Loyalist Legions:**
+- Endpoint: `/legions/loyalists`
 - Method: GET
-- Description: Returns the details of a specific legion based on the provided ID.
+- Description: Returns a list and details of all loyalist legions.
+
+- **Get All Traitor Legions:**
+- Endpoint: `/legions/traitors`
+- Method: GET
+- Description: Returns a list and details of all traitor legions.
 
 ### To:do
 
-- Add all the legions to the array.
-- Add homeworld property.
+- ~~Add all the legions to the array.~~
+- ~~Add homeworld property.~~
 - Add notable characters.
 - Add colorschemes.
-- Connect database (Vercel Postgres).
+- ~~Connect database (Vercel Postgres).~~
 
 ## Deployment
 

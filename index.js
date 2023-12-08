@@ -125,29 +125,24 @@ app.get("/legion/:id", async (req, res) => {
 });
 
 //Query route to Traitor Legions
-app.get("/legions/loyalty:", async (req, res) => {
+app.get("/legions/traitors", async (req, res) => {
 	try {
-		const { traitor } = req.query;
-		let query;
-
-		if (traitor !== undefined) {
-			const isTraitor = traitor === "true";
-			query = "SELECT * FROM legions WHERE traitor = $1";
-			const { rows: filteredLegions } = await pool.query(query, [isTraitor]);
-			res.json(filteredLegions);
-		} else {
-			query = "SELECT * FROM legions";
-			const { rows: allLegions } = await pool.query(query);
-			res.json(allLegions);
-		}
-
-		const filteredLegions = legions.filter(
-			(legion) => legion.traitor === isTraitor
-		);
-		res.json(filteredLegions);
+		const query = "SELECT * FROM legions WHERE traitor = true";
+		const { rows: traitorLegions } = await pool.query(query);
+		res.json(traitorLegions);
 	} catch (err) {
 		console.error(err.message);
-		res.status(500).send("Error to the sooorvooor");
+		res.status(500).send("Erroor to tha soorvoor");
+	}
+});
+app.get("/legions/loyalist", async (req, res) => {
+	try {
+		const query = "SELECT * FROM legions WHERE traitor = false";
+		const { rows: loyalistLegions } = await pool.query(query);
+		res.json(loyalistLegions);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send("Erroor to tha soorvoor");
 	}
 });
 
