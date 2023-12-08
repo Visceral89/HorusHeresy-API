@@ -1,6 +1,13 @@
+import pg from "pg";
 const express = require("express");
 const app = express();
 const port = 1337;
+
+const { Pool } = pg;
+
+const pool = new Pool({
+	connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+});
 
 const legions = [
 	{
