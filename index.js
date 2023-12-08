@@ -1,14 +1,9 @@
-import pg from "pg";
 const express = require("express");
 const app = express();
 const port = 1337;
+import pool from "./database.js";
 
-const { Pool } = pg;
-
-const pool = new Pool({
-	connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-});
-
+/* OLD ARRAY THAT I DONT USE
 const legions = [
 	{
 		id: 1,
@@ -99,33 +94,61 @@ const legions = [
 		traitor: true,
 	},
 ];
+*/
 
 // Route to all legions.
-app.get("/legions", (req, res) => {
-	res.json(legions);
+app.get("/legions", async (req, res) => {
+	try {
+		const { rows: legions } = await pool.query("SELECT * FROM legions");
+		res.json(legions);
+	} catch (err) {
+		res.status(500).send(err.message);
+	}
 });
 
 // Route to specific legion
-app.get("/legion/:id", (req, res) => {
-	const legion = legions.find((f) => f.id === parseInt(req.params.id));
+app.get("/legion/:id", async (req, res) => {
+	try {
+		const legionId = parseInt(req.params.id);
+		const query = "SELECT * FROM legions WHERE id = $1";
+		const { rows: legion } = await pool.query(query, [legionId]);
 
-	if (legion) {
-		res.json(legion);
-	} else {
-		res.status(404).send("Legion not found");
+		if (legion.length) {
+			res.json(legion[0]);
+		} else {
+			res.status(404).send("Legion not found, try 1-20");
+		}
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send("Error to the sooorvooor");
 	}
 });
 
 //Query route to Traitor Legions
-app.get("/legions/loyalty:", (req, res) => {
-	const { traitor } = req.query;
+app.get("/legions/loyalty:", async (req, res) => {
+	try {
+		const { traitor } = req.query;
+		let query;
 
-	const isTraitor = traitor === "true";
+		if (traitor !== undefined) {
+			const isTraitor = traitor === "true";
+			query = "SELECT * FROM legions WHERE traitor = $1";
+			const { rows: filteredLegions } = await pool.query(query, [isTraitor]);
+			res.json(filteredLegions);
+		} else {
+			query = "SELECT * FROM legions";
+			const { rows: allLegions } = await pool.query(query);
+			res.json(allLegions);
+		}
 
-	const filteredLegions = legions.filter(
-		(legion) => legion.traitor === isTraitor
-	);
-	res.json(filteredLegions);
+		const filteredLegions = legions.filter(
+			(legion) => legion.traitor === isTraitor
+		);
+		res.json(filteredLegions);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send("Error to the sooorvooor");
+	}
 });
 
 app.listen(port, () => {
